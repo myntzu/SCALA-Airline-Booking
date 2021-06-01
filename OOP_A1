@@ -1,0 +1,132 @@
+echo "# SCALA-Airline-Booking" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/myntzu/SCALA-Airline-Booking.git
+git push -u origin main
+
+/* 
+OOP ASSIGNMENT 1: 
+Scala Code for Airline Ticket Booking System 
+*/ 
+
+
+case class Date(dd: Int, mm: Int, yyyy: Int){ 
+    def flightDate(): Unit = { 
+        println("Date:" + dd + "/" + mm + "/" + yyyy) 
+    } 
+} 
+
+case class Time(hr: Int, min: Int){ 
+    def flightTime(): Unit ={ 
+        //Displays time in 24HR format 
+        println("Time: " + hr + ":" + min) 
+    } 
+} 
+ 
+class DateTime(time: Time, date: Date){ 
+}  
+
+class Seat(val seatNum: String, val col: Char, val row: Int){ 
+    //e.g. seatNum: 10A -> row: 10, column: A 
+    def isAvailable: Boolean ={ 
+        /* 
+        - To identify if a particular seat in a flight is available for booking 
+        */ 
+    } 
+} 
+
+
+class Ticket(val ticketID: String, var type: String, var ticketPrice: Double, val dateTime: DateTime, val seat: Seat){ 
+} 
+
+
+class Passenger(val firstName: String, val lastName: String, val passportNum: String, var gender: Char, var age: Int, val ticket: Ticket){ 
+
+    //to categorise passenger according to age 
+    def category: String ={ 
+        if(age >= 60){ 
+            "Senior Citizen" 
+        }else if(age >= 18){ 
+            "Adult" 
+        }else if(age >= 5){ 
+            "Children" 
+        }else{ 
+            "Toddler" 
+        } 
+   } 
+} 
+
+class CabinCrew(val crewID: String, val salary: Double, a: String, b: String, c: String, d: Char, e: Int, tix: Ticket) extends Passenger(a, b, c, d, e, tix){ 
+
+    //to identify cabin crew rank 
+    def rank: String ={ 
+        if(salary > 1200.00){ 
+            "Junior Flight Attendant" 
+        }else if(salary >= 3500.00){ 
+            "Senior Flight Attendant" 
+        }else if(salary >= 6000.00){ 
+            "Junior Pilot" 
+        }else{ 
+            "Executive Pilot" 
+        } 
+    } 
+
+    def onDuty: Boolean ={ 
+        /* 
+        To see if a particular crew is current on duty or not 
+        */ 
+    } 
+} 
+
+ 
+class Route(val departFrom: String, val arriveTo: String, val transit: String, var duration: Double){ 
+} 
+ 
+class Flight(val flightCode: String, var capacity: Int, route:Array[Route], passenger:Array[Passenger], crew:Array[CabinCrew]){ 
+} 
+
+class Booking(flight: Flight, var payment: Double){ 
+    def searchFlightRoute(route: String): Route ={ 
+        /* 
+        - Passengers can search up for possible flight routes (i.e. KL TO LDN) 
+        - Method returns relevant information on routes such as departing/arrival location, overall duration and if a transit is included. 
+        */ 
+    }
+    
+    def bookTicket(ticket: Ticket): Passenger ={ 
+        /* 
+        - Allows passenger(s) to book ticket(s) for themselves and/or for others travelling with them. 
+        - Method returns the passenger's particular details with their ticket information. 
+        */ 
+    } 
+    
+    def checkBooking(passenger: Passenger): Unit ={ 
+        /* 
+        - Before confirming a booking, passengers can check back on details to verify their name, passport number and so on. 
+        */ 
+    } 
+
+    def updateBooking(dateTime: DateTime, type: String, seat: Seat, ticketPrice: Double): Ticket ={ 
+        /* 
+        - Passengers can update details on their booking such as changing date/time, type (i.e. one way ticket) and/or their chosen seat. 
+        - Overall price of ticket is subject to change depending on what had been modified  (i.e. Priority seat $ > Regular seat $) 
+        - Method returns all relevant information of the ticket which was modified for their flight. 
+        */ 
+    } 
+
+    def cancelBooking(ticket: Ticket): String ={ 
+        /* 
+        - Passengers may also choose to cancel their booking entirely. 
+        - A message will be printed out to notify passenger of the cancellation. 
+        */ 
+    } 
+
+    def makePayment(payment: Double): Double ={ 
+        /* 
+        - Passengers will be able to make payment to process their booking based on the price which is returned to them 
+        */ 
+
+    } 
+} 
